@@ -4,17 +4,20 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
-public class Rocketship extends GameObject{
+public class Projectile extends GameObject{
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;	
-	public Rocketship(int x, int y, int width, int height) {
+	public Projectile(int x, int y, int width, int height) {
 		super(x, y, width, height);
 		// TODO Auto-generated constructor stub
 		speed = 10;
 		if (needImage) {
-		    loadImage ("rocket.png");
+		    loadImage ("projectile.png");
 		}
+	}
+	public void update() {
+		y-=speed;
 	}
 	public void draw(Graphics g) {
 		if (gotImage) {
@@ -24,30 +27,15 @@ public class Rocketship extends GameObject{
 			g.fillRect(x, y, width, height);
 		}
 	}
-	public void up() {
-		y -= speed;
-	}
-	public void down() {
-		y += speed;
-	}
-	public void right() {
-		x += speed;
-	}
-	public void left() {
-		x -= speed;
-	}
 	void loadImage(String imageFile) {
 	    if (needImage) {
 	        try {
-	            image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
-		    gotImage = true;
+	        	image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
+	        	gotImage = true;
 	        } catch (Exception e) {
 	            
 	        }
 	        needImage = false;
 	    }
 	}
-	public Projectile getProjectile() {
-        return new Projectile(x+width/2, y, 10, 10);
-	} 
 }

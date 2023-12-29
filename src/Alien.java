@@ -4,17 +4,20 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
-public class Rocketship extends GameObject{
+public class Alien extends GameObject{
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;	
-	public Rocketship(int x, int y, int width, int height) {
+	public Alien(int x, int y, int width, int height) {
 		super(x, y, width, height);
 		// TODO Auto-generated constructor stub
-		speed = 10;
+		speed = 1;
 		if (needImage) {
-		    loadImage ("rocket.png");
+		    loadImage ("alien.png");
 		}
+	}
+	public void update() {
+		y+=speed;
 	}
 	public void draw(Graphics g) {
 		if (gotImage) {
@@ -22,19 +25,7 @@ public class Rocketship extends GameObject{
 		} else {
 			g.setColor(Color.BLUE);
 			g.fillRect(x, y, width, height);
-		}
-	}
-	public void up() {
-		y -= speed;
-	}
-	public void down() {
-		y += speed;
-	}
-	public void right() {
-		x += speed;
-	}
-	public void left() {
-		x -= speed;
+		};
 	}
 	void loadImage(String imageFile) {
 	    if (needImage) {
@@ -47,7 +38,4 @@ public class Rocketship extends GameObject{
 	        needImage = false;
 	    }
 	}
-	public Projectile getProjectile() {
-        return new Projectile(x+width/2, y, 10, 10);
-	} 
 }
